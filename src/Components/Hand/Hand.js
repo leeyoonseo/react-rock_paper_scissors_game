@@ -5,11 +5,15 @@ import './Hand.css';
 class Hand extends Component{
   constructor(props){
     super(props);
+    console.log('hands props',props);
   }
   render(){
     const {name} = this.props;
     return(
-      <p className={name + ' hands'}></p>
+      <p className={
+        this.props.started ? name + ' hands started' 
+                            : name + ' hands' 
+      }></p>
     )
   }
 }

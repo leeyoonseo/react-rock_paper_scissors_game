@@ -13,13 +13,23 @@ class App extends Component {
     result : ''
   }
 
+  onClickButton = () => {
+    console.log('onClickButton');
+    this.setState({
+      started : true
+    });
+  }
+
   render() {
+    const {onClickButton} = this;
+    const {started} = this.state;
+
     return (
       <div className="App">
         <Title title="Rock Scissors Paper" />
-        <Button ButtonText="시작"/>
-        <Hand name="player" />
-        <Hand name="npc" />     
+        <Button ButtonText="시작" onClickButton={onClickButton} />
+        <Hand name="player" started={started} />
+        <Hand name="npc" started={started} />     
         <Controller />   
       </div>
     );

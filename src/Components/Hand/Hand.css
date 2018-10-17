@@ -1,21 +1,25 @@
 .hands{
   width:125px;
   height: 175px;
-  background:url('/images/hands2.jpg')no-repeat;
+  background:url('/images/hands.jpg')no-repeat;
   background-size:384px;
+  background-position-x:0;
 }
 .player{
-  animation: animate .5s steps(3,end) infinite;
+
 }
 .npc{
-  animation: animate .5s steps(3,end) infinite;
+
 }
 
 .player.started{
-
+  animation: animate .5s steps(3,end) infinite;
+  animation-direction: reverse;
+  -webkit-animation-direction: reverse;
 }
-.npc.started{
 
+.npc.started{
+  animation: animate .5s steps(3,end) infinite;
 }
 
 @keyframes animate{
