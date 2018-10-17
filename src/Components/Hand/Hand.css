@@ -1,0 +1,28 @@
+.hands{
+  width:125px;
+  height: 175px;
+  background:url('/images/hands2.jpg')no-repeat;
+  background-size:384px;
+}
+.player{
+  animation: animate .5s steps(3,end) infinite;
+}
+.npc{
+  animation: animate .5s steps(3,end) infinite;
+}
+
+.player.started{
+
+}
+.npc.started{
+
+}
+
+@keyframes animate{
+  0%{
+    background-position-x:0;
+  }
+  100%{
+    background-position-x:-384px;
+  } 
+}
