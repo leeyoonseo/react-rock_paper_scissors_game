@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Button from './Button';
-import Title from './Title';
+import TextBox from './TextBox';
 import Hand from './Hand';
 import Controller from './Controller';
 import './App.css';
@@ -16,18 +16,20 @@ class App extends Component {
   onClickButton = () => {
     console.log('onClickButton');
     this.setState({
-      started : true
+      started : (this.state.started) ? false : true
     });
   }
 
   render() {
     const {onClickButton} = this;
-    const {started} = this.state;
+    const {started,result} = this.state;
 
     return (
       <div className="App">
-        <Title title="Rock Scissors Paper" />
-        <Button ButtonText="시작" onClickButton={onClickButton} />
+        <h1>Rock Scissors Paper</h1>
+        <Button ButtonText={started ? "정지" : "시작"} 
+                onClickButton={onClickButton} />
+        <TextBox text="승리 or 패배"/>
         <Hand name="player" started={started} />
         <Hand name="npc" started={started} />     
         <Controller />   

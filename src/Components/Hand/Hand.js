@@ -8,11 +8,11 @@ class Hand extends Component{
     console.log('hands props',props);
   }
   render(){
-    const {name} = this.props;
+    const {name,started} = this.props;
     return(
       <p className={
-        this.props.started ? name + ' hands started' 
-                            : name + ' hands' 
+        started ? name + ' hands started' 
+                : name + ' hands' 
       }></p>
     )
   }
