@@ -1,0 +1,27 @@
+.round{
+  position:relative;
+  display:inline-block;
+  margin:10px 0;
+}
+.round:hover .reset{
+  display:inline-block;
+}
+.reset{
+  display:none;
+  padding:0;
+  border:none;
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  cursor:pointer;
+  background-color:#fff;
+  color:red;
+  font-size:18px;
+  font-weight:400;
+}
+
+.result{
+  display:inline-block;
+  width:100%;
+}

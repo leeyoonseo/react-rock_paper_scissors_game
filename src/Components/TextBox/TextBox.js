@@ -1,22 +1,25 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import './TextBox.css';
 
 class TextBox extends Component{
-  constructor(props){
-    super(props);
-  }
   render(){
-    const {text} = this.props;
+    const {round,result,onClickRoundReset} = this.props;
+    
     return(
-      <div>{text}</div>
+      <div>
+        <div className="round">Round : <span>{round}</span>
+          <button type="button" className="reset" onClick={onClickRoundReset}>reset</button>
+        </div>
+        <span className={result + ' result'}>{result}</span>
+      </div>
     )
   }
 }
 
-//className={result == '' ? "empty" : ""}
-
 TextBox.propTypes = {
-  text : PropTypes.string.isRequired
+  round : PropTypes.number.isRequired,
+  result : PropTypes.string.isRequired
 }
 
 export default TextBox;

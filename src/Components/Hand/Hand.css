@@ -4,21 +4,39 @@
   background:url('/images/hands.jpg')no-repeat;
   background-size:384px;
   background-position-x:0;
+  margin-bottom:40px;
+  position:relative;
+}
+.hands.rock{
+  background-position-x:0;
+}
+.hands.scissors{
+  background-position-x:-128px;
+}
+.hands.paper{
+  background-position-x:-256px;
+}
+.text{
+  position:absolute;
+  bottom: -25px;
+  left:-9px;
+  width:100%;
+  font-size: 18px;
 }
 .player{
-
+  float:left;
 }
-
+.player .text{
+  color:red;
+}
 .npc{
-
+  float:right;
 }
-
 .player.started{
   animation: animate .5s steps(3,end) infinite;
   animation-direction: reverse;
   -webkit-animation-direction: reverse;
 }
-
 .npc.started{
   animation: animate .5s steps(3,end) infinite;
 }
