@@ -18,26 +18,30 @@
 }
 .text{
   position:absolute;
-  bottom: -25px;
-  left:-9px;
-  width:100%;
+  bottom: -40px;
+  left:0;
+  /* text-overflow:ellipsis; */
+  white-space:nowrap;
+  word-wrap:normal;
+  width:100px;
+  overflow:hidden;
   font-size: 18px;
 }
-.player{
+.Player{
   float:left;
 }
-.player .text{
-  color:red;
+.Player .text{
+  color:blue;
 }
-.npc{
+.NPC{
   float:right;
 }
-.player.started{
+.Player.started{
   animation: animate .5s steps(3,end) infinite;
   animation-direction: reverse;
   -webkit-animation-direction: reverse;
 }
-.npc.started{
+.NPC.started{
   animation: animate .5s steps(3,end) infinite;
 }
 

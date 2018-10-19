@@ -5,13 +5,13 @@ class Controller extends Component{
    render(){
     const {onClickButton} = this.props;
     const arr = [
-      { id : "rock", text : "바위" },
-      { id : "scissors", text : "가위"},
-      { id : "paper", text : "보"}
+      { id : "scissors", text : "scissors"},
+      { id : "rock", text : "rock" },
+      { id : "paper", text : "paper"}
     ];
 
     return(
-      <div>
+      <div className="controller">
         {
           arr.map((el,i)=>{
             return(

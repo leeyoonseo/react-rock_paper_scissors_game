@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Starter from './Starter';
+import React, { Component,Fragment } from 'react';
+import Button from './Button';
 import TextBox from './TextBox';
 import Hand from './Hand';
 import Controller from './Controller';
@@ -8,18 +8,30 @@ import './App.css';
 class App extends Component {
   state = {
     started : false,
-    play : false,
+    gamePlay : false,
+    soundPlay : false,
     playerSelectedHand : '',
+    playerName : '',
     round : 0,
     ranking : '',
     result : ''
   }
 
+  componentDidMount(){
+    const playName = prompt('Input your name?');
+    this.setState({
+      playerName : playName
+    });
+  }
+
   onClickStartButton = () => {
     this.setState({
       started : (this.state.started) ? false : true,
-      play: (this.state.play) ? false : true,
-      playerSelectedHand : (this.state.started) ? '' : this.state.playerSelectedHand
+      gamePlay: (this.state.gamePlay) ? false : true,
+      playerSelectedHand : (this.state.started) ? '' : this.state.playerSelectedHand,
+      npcSelectedHand : (this.state.started) ? '' : this.state.playerSelectedHand,
+      result : '',
+      round : (this.state.started) ? this.state.round : this.state.round + 1
     });
   }
 
@@ -33,39 +45,67 @@ class App extends Component {
       npcSelectedHand : npcHand,
       play : (this.state.play) ? false : true,
       started : false,
-      round : this.state.round + 1,
       result : getGameResult(npcHand,playerHand)
     });
   }
 
   onClickRoundReset = () => {
+    if(window.confirm('Do you want to round initialize?')){
+      this.setState({
+        playerSelectedHand : '',
+        npcSelectedHand : '',
+        started : false,
+        round : 0,
+        result : ''
+      });
+    }
+  }
+
+  onClickSoundStart = () => {
+    const myAudio = new Audio('./bensound-funnysong.mp3');
+    if(this.state.soundPlay){
+      myAudio.pause();
+    }else{
+      myAudio.play();
+    }
     this.setState({
-      round : 0
+      soundPlay : !this.state.soundPlay
     });
-    alert('round 정보가 초기화되었습니다.');
   }
 
   render() {
-    const {onClickStartButton,onClickControlButton,onClickRoundReset} = this;
-    const {started,playerSelectedHand,npcSelectedHand,round,result} = this.state;
+    const {onClickStartButton,onClickControlButton,onClickRoundReset,onClickSoundStart} = this;
+    const {started,playerSelectedHand,npcSelectedHand,playerName,round,result,soundPlay} = this.state;
 
     return (
-      <div className="App">
-        <h1>Rock Scissors Paper Game</h1>
-        <Starter name="startButton" 
-                ButtonText={started ? "Stop" : "Start"} 
-                onClickButton={onClickStartButton} />
-        <TextBox round={round} result={result} onClickRoundReset={onClickRoundReset} />
-        <div className="gamePanel">
-          <Hand name="player" 
-                started={started}
-                selectedHand={playerSelectedHand}/>
-          <Hand name="npc" 
-                started={started} 
-                selectedHand={npcSelectedHand} />
-        </div>     
-        <Controller onClickButton={onClickControlButton} />   
-      </div>
+      <Fragment>
+        <div className="App">
+          <div className="nav-bar">
+            <Button name="sound"
+                    ButtonText={soundPlay ? "||" : '>'}
+                    onClickButton={onClickSoundStart}/>          
+            <Button name="reset"
+                    ButtonText="Reset"
+                    onClickButton={onClickRoundReset}/>
+          </div>
+          <h1>Rock Scissors Paper Game</h1>
+          <Button name="startButton" 
+                  ButtonText={started ? "STOP" : "START"} 
+                  onClickButton={onClickStartButton} />
+          <TextBox round={round} result={result} />
+          <div className="gamePanel">
+            <Hand name="Player"
+                  playerName={playerName}
+                  started={started}
+                  selectedHand={playerSelectedHand}/>
+            <Hand name="NPC" 
+                  started={started} 
+                  selectedHand={npcSelectedHand} />
+          </div>     
+          <Controller onClickButton={onClickControlButton} />           
+          <span className="font-size_12">since 2018<br/>Audio : https://www.bensound.com/royalty-free-music/track/funny-song</span>
+        </div>
+      </Fragment>
     );
   }
 }
@@ -106,7 +146,7 @@ function convert(value){
 export default App;
 
 /*
-적용
+- 유저네임 등록 가능
 - 시작 클릭 실행, 정지 버튼으로 정지 가능
 - 시작 클릭 시 이미지 움직임
 - 이미지 애니메이션
@@ -117,15 +157,5 @@ export default App;
 - 라운드는 이기나 지나 비기나 계속 올라감
 - 라운드 리셋 버튼
 - 승리, 패배, 무승부 표현
-
-수정 및 추가
-- 디자인
-- player, npc의 승리횟수 노출
-- 다시 시도 버튼 
-- localStorage에 내가 한 게임 라운드 저장해서 랭킹 관리
-  confirm으로 유저가 저장, 저장하지 않음을 선택가능
-  날짜 정보 저장, 유저 네임 받을 수 있게 하기
-- 배경 음악 추가(무료 라이선스 찾기)
-  const myAudio = new Audio([sound url]);
-  myAudio.play(); 
+- 배경 음악 추가(무료 라이선스, 출처표시)
 */

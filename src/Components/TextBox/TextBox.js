@@ -3,15 +3,18 @@ import PropTypes from 'prop-types';
 import './TextBox.css';
 
 class TextBox extends Component{
+  shouldComponentUpdate(nextProps, nextState){
+    if(this.props.round !== nextProps.round || this.props.result !== nextProps.result){
+      return true;
+    }
+    return false;
+  }
   render(){
-    const {round,result,onClickRoundReset} = this.props;
-    
+    const {round,result} = this.props;
     return(
-      <div>
-        <div className="round">Round : <span>{round}</span>
-          <button type="button" className="reset" onClick={onClickRoundReset}>reset</button>
-        </div>
-        <span className={result + ' result'}>{result}</span>
+      <div className="round-pannel">
+        <p className="round">Round : <span>{round}</span></p>
+        <span id="result" className={result + ' result'}>{result}</span>
       </div>
     )
   }
